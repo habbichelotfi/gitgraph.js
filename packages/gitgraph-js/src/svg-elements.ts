@@ -59,6 +59,9 @@ interface GOptions {
 
 function createG(options: GOptions): SVGGElement {
   const g = document.createElementNS(SVG_NAMESPACE, "g");
+  g.addEventListener("click", () => {
+    console.log("jee;");
+  });
   options.children.forEach((child) => child && g.appendChild(child));
 
   if (options.translate) {

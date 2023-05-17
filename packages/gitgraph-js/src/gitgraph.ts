@@ -97,7 +97,7 @@ function createGitgraph(
 
   // React on gitgraph updates to re-render the graph.
   const gitgraph = new GitgraphCore(options);
-  gitgraph.subscribe((data) => {
+  gitgraph.subscribe((data: any) => {
     shouldRecomputeOffsets = true;
     render(data);
   });
@@ -282,7 +282,7 @@ function createGitgraph(
     const paths = Array.from(branchesPaths).map(([branch, coordinates]) => {
       return createPath({
         d: toSvgPath(
-          coordinates.map((coordinate) => coordinate.map(getWithCommitOffset)),
+          coordinates.map((coordinate: Coordinate[]) => coordinate.map(getWithCommitOffset)),
           isBezier,
           gitgraph.isVertical,
         ),
@@ -313,6 +313,9 @@ function createGitgraph(
 
           createG({
             translate: { x: -x, y: 0 },
+            onClick:()=>{
+              
+            },
             children: [
               renderMessage(commit),
               ...renderBranchLabels(commit),
@@ -330,7 +333,7 @@ function createGitgraph(
 
       const commitRadius = commit.style.dot.size;
 
-      return commit.parents.map((parentHash) => {
+      return commit.parents.map((parentHash: any) => {
         const parent = commits.find(({ hash }) => hash === parentHash);
         if (!parent) return null;
 

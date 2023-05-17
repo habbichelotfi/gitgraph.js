@@ -18,5 +18,7 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["lodash"]
   }
 }

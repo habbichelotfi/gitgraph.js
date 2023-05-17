@@ -178,6 +178,7 @@ class GitgraphCore<TNode = SVGElement> {
       parentCommitHash: this.refs.getCommit(defaultParentBranchName),
       style: this.template.branch,
       onGraphUpdate: () => this.next(),
+      onClick:()=>{}
     };
 
     if (typeof args === "string") {
@@ -318,7 +319,7 @@ class GitgraphCore<TNode = SVGElement> {
       this.template.commit.spacing,
       this.isVertical,
       this.isReverse,
-      () => createDeletedBranch(this, this.template.branch, () => this.next()),
+      () => createDeletedBranch(this, this.template.branch, () => this.next(),()=>{}),
     ).execute();
   }
 

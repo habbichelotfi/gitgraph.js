@@ -18,6 +18,8 @@ interface CommitOptions<TNode> extends CommitRenderOptions<TNode> {
   style: CommitStyle;
   body?: string;
   hash?: string;
+  dotColor?: string;
+
   parents?: string[];
   dotText?: string;
   onClick?: (commit: Commit<TNode>) => void;
@@ -60,6 +62,13 @@ class Commit<TNode = SVGElement> {
    * Abbreviated commit hash
    */
   public hashAbbrev: string;
+
+  /**
+   * define the dot Color
+   */
+
+  public dotColor: string | undefined;
+
   /**
    * Parent hashes
    */
@@ -193,6 +202,7 @@ class Commit<TNode = SVGElement> {
     // Set commit message
     this.subject = options.subject;
     this.body = options.body || "";
+    this.dotColor = options.dotColor;
 
     // Set commit hash
     this.hash = options.hash || getRandomHash();

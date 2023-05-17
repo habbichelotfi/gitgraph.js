@@ -55,6 +55,8 @@ interface GitgraphBranchOptions<TNode> extends BranchRenderOptions<TNode> {
    * Branch style
    */
   style?: TemplateOptions["branch"];
+
+  onClick?: (branch: Branch<TNode>) => void;
 }
 
 class GitgraphUserApi<TNode> {

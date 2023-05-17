@@ -157,7 +157,7 @@ class BranchUserApi<TNode> {
 
     this._branch = createDeletedBranch(this._graph, this._branch.style, () => {
       // do nothing
-    });
+    },()=>{});
 
     this._onGraphUpdate();
 

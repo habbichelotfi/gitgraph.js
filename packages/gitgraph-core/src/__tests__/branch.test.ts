@@ -9,7 +9,8 @@ describe("Branch", () => {
       const core = new GitgraphCore();
       const gitgraph = core.getUserApi();
 
-      const master = gitgraph.branch("master");
+      const master = gitgraph.branch({name:"master"});
+      
       master.commit("master 1"); // 0
       master.commit("master 2"); // 1
 
@@ -50,7 +51,7 @@ describe("Branch", () => {
 
     it("should have 2 parents commits", () => {
       const mergeCommit = log.find((c) => c.subject === "Merge branch develop");
-      expect(mergeCommit.parents.length).toBe(2);
+      expect(mergeCommit?.parents.length).toBe(2);
     });
 
     it("should throw if the branch doesn't exist", () => {
@@ -66,7 +67,7 @@ describe("Branch", () => {
 
     it("should have the last master commit as first parent and dev as second parent", () => {
       const mergeCommit = log.find((c) => c.subject === "Merge branch develop");
-      expect(mergeCommit.parents).toEqual([log[5].hash, log[4].hash]);
+      expect(mergeCommit?.parents).toEqual([log[5].hash, log[4].hash]);
     });
   });
 
@@ -98,7 +99,7 @@ describe("Branch", () => {
 
     it("should have 2 parents commits", () => {
       const mergeCommit = log.find((c) => c.subject === "Merge branch develop");
-      expect(mergeCommit.parents.length).toBe(2);
+      expect(mergeCommit?.parents.length).toBe(2);
     });
   });
 
@@ -109,7 +110,7 @@ describe("Branch", () => {
     gitgraph.branch({ name: "master", style: {} });
     const master = core.branches.get("master");
 
-    expect(Object.keys(master.style).length).not.toBe(0);
+    expect(Object.keys(master!.style).length).not.toBe(0);
   });
 
   it("should fallback on template style of label for non-provided keys", () => {
@@ -119,7 +120,7 @@ describe("Branch", () => {
     gitgraph.branch({ name: "master", style: { label: {} } });
     const master = core.branches.get("master");
 
-    expect(Object.keys(master.style.label).length).not.toBe(0);
+    expect(Object.keys(master!.style.label).length).not.toBe(0);
   });
 
   it("should override template style for provided keys", () => {
@@ -129,7 +130,7 @@ describe("Branch", () => {
     gitgraph.branch({ name: "master", style: { spacing: 12345 } });
     const master = core.branches.get("master");
 
-    expect(master.style.spacing).toBe(12345);
+    expect(master!.style.spacing).toBe(12345);
   });
 
   describe("checkout", () => {

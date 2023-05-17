@@ -47,6 +47,8 @@ interface BranchOptions<TNode = SVGElement> extends BranchRenderOptions<TNode> {
    * On graph update.
    */
   onGraphUpdate: () => void;
+
+  onClick: (branch: Branch<TNode>) => void;
 }
 
 const DELETED_BRANCH_NAME = "";
@@ -58,6 +60,7 @@ class Branch<TNode = SVGElement> {
   public parentCommitHash: BranchOptions["parentCommitHash"];
   public commitDefaultOptions: BranchCommitDefaultOptions<TNode>;
   public renderLabel: BranchOptions<TNode>["renderLabel"];
+  public onClick?: (branch: Branch<TNode>) => void;
 
   private gitgraph: GitgraphCore<TNode>;
   private onGraphUpdate: () => void;
@@ -70,6 +73,7 @@ class Branch<TNode = SVGElement> {
     this.commitDefaultOptions = options.commitDefaultOptions || { style: {} };
     this.onGraphUpdate = options.onGraphUpdate;
     this.renderLabel = options.renderLabel;
+    this.onClick = options.onClick;
   }
 
   /**
@@ -91,11 +95,13 @@ function createDeletedBranch<TNode>(
   gitgraph: GitgraphCore<TNode>,
   style: BranchStyle,
   onGraphUpdate: () => void,
+  onClick: () => void,
 ): Branch<TNode> {
   return new Branch({
     name: DELETED_BRANCH_NAME,
     gitgraph,
     style,
     onGraphUpdate,
+    onClick,
   });
 }
