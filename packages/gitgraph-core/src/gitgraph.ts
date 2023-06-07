@@ -98,7 +98,7 @@ class GitgraphCore<TNode = SVGElement> {
     this.initCommitOffsetX = numberOptionOr(options.initCommitOffsetX, 0);
     this.initCommitOffsetY = numberOptionOr(options.initCommitOffsetY, 0);
     this.mode = options.mode;
-    this.author = options.author || "Sergio Flores <saxo-guy@epic.com>";
+    this.author = options.author || "Sergio <saxo-guy@epic.com>";
     this.commitMessage =
       options.commitMessage || "He doesn't like George Michael! Boooo!";
     this.generateCommitHash =
